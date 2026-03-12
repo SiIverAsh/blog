@@ -20,13 +20,13 @@ app.use(morgan('dev'));
 
 app.use('/api', apiRoutes);
 
-// Daily Automation Cron Job (Runs at 00:00 Every Day)
+/* 
+// Daily Automation Cron Job (Runs at 00:00 Every Day) - DISABLED FOR DEBUGGING
 cron.schedule('0 0 * * *', () => {
     console.log('⏰ [Cron] Starting daily automation scripts...');
     const automationPath = path.resolve(__dirname, '../../run_automation.py');
     const seedPath = path.resolve(__dirname, './scripts/seed.ts');
     
-    // 1. Run Python Automation (Updates files)
     exec(`python "${automationPath}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`❌ [Cron] Automation Error: ${error.message}`);
@@ -34,7 +34,6 @@ cron.schedule('0 0 * * *', () => {
         }
         console.log(`✅ [Cron] Automation Finished.`);
 
-        // 2. Sync Files to PostgreSQL
         console.log('🔄 [Cron] Syncing new data to PostgreSQL...');
         exec(`npx tsx "${seedPath}"`, (sError, sStdout, sStderr) => {
             if (sError) {
@@ -43,12 +42,12 @@ cron.schedule('0 0 * * *', () => {
             }
             console.log('✨ [Cron] Database synced successfully.');
             
-            // 3. Refresh backend cache (though DB is live, good for consistency if any in-memory state exists)
             PostsService.refreshCache();
             DataService.refreshCache();
         });
     });
 });
+*/
 
 // Global Error Handler
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
