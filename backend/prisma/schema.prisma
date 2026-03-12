@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Post {
+  id               Int      @id @default(autoincrement())
+  slug             String   @unique // 对应原 md 文件名
+  title            String
+  date             DateTime
+  last_modified_at DateTime?
+  content          String   @db.Text
+  htmlContent      String   @db.Text
+  excerpt          String   @db.Text
+  subject          String?
+  categories       Json     @default("[]")
+  tags             Json     @default("[]")
+  layout           String   @default("post")
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Recommendation {
+  id           Int      @id @default(autoincrement())
+  date         String   @unique // "YYYY-MM-DD"
+  tech         Json     
+  paper        Json     
+  llm          Json
+  algorithm    Json
+  new_project  Json
+  history      Json     
+  cv_recommend Json     
+  
+  createdAt    DateTime @default(now())
+}
+
+model HistoryLog {
+  id        Int      @id @default(autoincrement())
+  date      String   @unique
+  titles    Json     
+  createdAt DateTime @default(now())
+}
+
+model MeInfo {
+  id      Int    @id @default(1)
+  content Json   
+}

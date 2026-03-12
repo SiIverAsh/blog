@@ -1,0 +1,35 @@
+# Environments
+.env
+*.env.local
+.env.*
+
+# Node
+node_modules/
+dist/
+build/
+.eslintcache
+
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+data/_posts/BLOG_TEMPLATE.md
+data/_posts/COMMIT_LOG_FORMAT.md
+backend/node_modules/
+frontend/node_modules/
+frontend/dist/
